@@ -4,13 +4,13 @@ import java.text.SimpleDateFormat;
 import java.util.Arrays;
 import java.util.TimeZone;
 
-import com.sandri.workshopmongo.dto.AuthorDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Configuration;
 
 import com.sandri.workshopmongo.domain.Post;
 import com.sandri.workshopmongo.domain.User;
+import com.sandri.workshopmongo.dto.AuthorDTO;
 import com.sandri.workshopmongo.repository.PostRepository;
 import com.sandri.workshopmongo.repository.UserRepository;
 
@@ -42,6 +42,9 @@ public class Instantiation implements CommandLineRunner {
         Post post2 = new Post(null, sdf.parse("23/03/2018"), "Bom dia", "Acordei feliz hoje!", new AuthorDTO(maria));
 
         postReposiroty.saveAll(Arrays.asList(post1, post2));
+
+        maria.getPosts().addAll(Arrays.asList(post1, post2));
+        userReposiroty.save(maria);
     }
 
 }
